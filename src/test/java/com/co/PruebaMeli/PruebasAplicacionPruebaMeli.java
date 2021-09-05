@@ -1,10 +1,10 @@
-package com.co.melitest.MeliTestSebastian_Velasquez_Quiros;
+package com.co.PruebaMeli;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MeliTestSebastianVelasquezQuirosApplicationTests {
+class PruebasAplicacionPruebaMeli {
 
 	@Test
 	void contextLoads() {

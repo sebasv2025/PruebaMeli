@@ -1,4 +1,4 @@
-package com.co.melitest.MeliTestSebastian_Velasquez_Quiros.models;
+package com.co.PruebaMeli.models;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

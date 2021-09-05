@@ -1,16 +1,9 @@
-package com.co.melitest.MeliTestSebastian_Velasquez_Quiros.models;
-
-import org.springframework.stereotype.Component;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+package com.co.PruebaMeli.models;
 
 
-@Entity
 public class Humano {
 
-    @Id
+
     private String adn;
 
     private boolean esMutante;

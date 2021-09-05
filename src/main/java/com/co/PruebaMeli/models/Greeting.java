@@ -1,4 +1,4 @@
-package com.co.melitest.MeliTestSebastian_Velasquez_Quiros.models;
+package com.co.PruebaMeli.models;
 
 
 public class Greeting {
