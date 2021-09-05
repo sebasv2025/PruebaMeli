@@ -1,6 +1,6 @@
 package com.co.PruebaMeli.services;
 
-import com.co.PruebaMeli.models.Humano;
+import com.co.PruebaMeli.modelo.Humano;
 
 public class Response {
 
@@ -10,4 +10,11 @@ public class Response {
         this.humano = humano;
     }
 
+    public Humano getHumano() {
+        return humano;
+    }
+
+    public boolean esMutante(){
+        return humano.esMutante();
+    }
 }

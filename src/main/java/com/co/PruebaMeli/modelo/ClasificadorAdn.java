@@ -1,4 +1,4 @@
-package com.co.PruebaMeli.models;
+package com.co.PruebaMeli.modelo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

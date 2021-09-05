@@ -1,4 +1,4 @@
-package com.co.PruebaMeli.modeloBD;
+package com.co.PruebaMeli.entidades;
 
 
 import javax.persistence.*;
@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "humano")
-public class HumanoBD {
+public class EntidadHumano {
 
     @Id
     @Column(name = "adn")
@@ -14,11 +14,11 @@ public class HumanoBD {
     @Column(name = "mutante")
     private boolean esMutante;
 
-    public HumanoBD(){
+    public EntidadHumano(){
 
     }
 
-    public HumanoBD(String adn, boolean esMutante){
+    public EntidadHumano(String adn, boolean esMutante){
         this.adn = adn;
         this.esMutante = esMutante;
     }

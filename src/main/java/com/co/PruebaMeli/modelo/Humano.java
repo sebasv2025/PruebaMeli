@@ -1,4 +1,4 @@
-package com.co.PruebaMeli.models;
+package com.co.PruebaMeli.modelo;
 
 
 public class Humano {

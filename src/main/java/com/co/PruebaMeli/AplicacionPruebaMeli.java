@@ -1,6 +1,6 @@
 package com.co.PruebaMeli;
 
-import com.co.PruebaMeli.models.Humano;
+import com.co.PruebaMeli.modelo.Humano;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

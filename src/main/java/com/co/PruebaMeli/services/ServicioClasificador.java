@@ -1,48 +1,39 @@
 package com.co.PruebaMeli.services;
 
-import com.co.PruebaMeli.modeloBD.HumanoBD;
-import com.co.PruebaMeli.models.Humano;
-import com.co.PruebaMeli.repositorio.IHumanoBD;
-import com.co.PruebaMeli.models.ClasificadorAdn;
-import com.co.PruebaMeli.models.ITransformador;
+import com.co.PruebaMeli.entidades.EntidadHumano;
+import com.co.PruebaMeli.modelo.Humano;
+import com.co.PruebaMeli.repositorio.IHumanoRepositorio;
+import com.co.PruebaMeli.modelo.ClasificadorAdn;
+import com.co.PruebaMeli.modelo.ITransformador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ServicioClasificador {
+public class ServicioClasificador implements IServicioClasificador{
 
     private ClasificadorAdn clasificadorAdn;
-    private IHumanoBD repositorio;
+    private IHumanoRepositorio repositorio;
     private ITransformador transformador;
 
     @Autowired
-    public ServicioClasificador(ClasificadorAdn clasificadorAdn, IHumanoBD repositorio, ITransformador transformador){
+    public ServicioClasificador(ClasificadorAdn clasificadorAdn, IHumanoRepositorio humanoRepositorio, ITransformador transformador){
         this.clasificadorAdn = clasificadorAdn;
-        this.repositorio = repositorio;
+        this.repositorio = humanoRepositorio;
         this.transformador = transformador;
     }
 
-
-
-    public Response procesar(String[] adn){
-
-        String cadenaAdn = transformador.unificarCadenaAdn(adn);
-
-
-        /*if(repositorio.hayRegistros(cadenaAdn)){
+    @Override
+    public Response procesarAdn(String[] adn){
+        /*
+        if(repositorio.existeAdn(transformador.unificarCadenaAdn(adn))){
             throw new ExcepcionMutante("El adn ya existe.");
-        }
-         */
-        boolean esMutante = clasificadorAdn.esMutante(adn);
+        }*/
 
-        Humano humano = new Humano(cadenaAdn, esMutante);
-        HumanoBD humanooo = new HumanoBD("ABD", false);
+        EntidadHumano entidadHumano = new EntidadHumano(transformador.unificarCadenaAdn(adn), clasificadorAdn.esMutante(adn));
+        repositorio.save(entidadHumano);
 
-        repositorio.save(humanooo);
-
+        Humano humano = new Humano(transformador.unificarCadenaAdn(adn), clasificadorAdn.esMutante(adn));
         return new Response(humano);
-
-
     }
 
 }

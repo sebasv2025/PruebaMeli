@@ -1,4 +1,4 @@
-package com.co.PruebaMeli.models;
+package com.co.PruebaMeli.modelo;
 
 import org.springframework.stereotype.Component;
 
@@ -19,8 +19,16 @@ public class Transformador implements ITransformador {
     }
 
     @Override
-    public String unificarCadenaAdn(String[] adn) {
-        return null;
+    public String unificarCadenaAdn(String[] adn){
+
+        StringBuilder cadenaAdn = new StringBuilder(255);
+
+        for (int i=0; i<adn.length; i++){
+            for(int j=0; j<adn.length; j++){
+                cadenaAdn.append(adn[i].charAt(j));
+            }
+        }
+        return cadenaAdn.toString();
     }
 
 
