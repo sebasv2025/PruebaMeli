@@ -23,7 +23,7 @@ public class ClasificadorAdn {
         
         char[][] nuevaMatriz = transformador.modelarAdnEnMatriz(adn);
 
-        int accountant = 0;
+        int acumulador = 0;
         char[] adnMuestra = "ACTG".toCharArray();
 
 
@@ -31,18 +31,18 @@ public class ClasificadorAdn {
             for(int j= 0; j< adn.length; j++){
                 for (int k=0; k< adn.length ; k++){
                     if (adnMuestra[i] == nuevaMatriz[k][j] || adnMuestra[i] == nuevaMatriz[j][k]){
-                        accountant++;
-                    }else if(accountant >= 4)
+                        acumulador++;
+                    }else if(acumulador >= 4)
                     {
                         return true;
                     }else{
-                        accountant=0;
+                        acumulador=0;
                     }
                 }
-                if (accountant >= 4){
+                if (acumulador >= 4){
                     return true;
                 }else {
-                    accountant=0;
+                    acumulador=0;
                 }
             }
         }
@@ -55,7 +55,7 @@ public class ClasificadorAdn {
         int alto = adn.length;
         char[][] nuevaMatriz = transformador.modelarAdnEnMatriz(adn);
 
-        int accountant = 0;
+        int acumulador = 0;
         char[] adnMuestra = "ACTG".toCharArray();
 
         for(int i= 0; i< adnMuestra.length; i++){
@@ -66,22 +66,22 @@ public class ClasificadorAdn {
                     //System.out.println(nuevaMatriz[vertical][horizontal]);
 
                     if (adnMuestra[i] == nuevaMatriz[vertical][horizontal]){
-                        accountant++;
-                    }else if(accountant >= 4)
+                        acumulador++;
+                    }else if(acumulador >= 4)
                     {
                         return true;
                     }else{
-                        accountant=0;
+                        acumulador=0;
                     }
 
                 }
                 //System.out.println("\r");
 
                 //Se inicia nueva evaluación de ADN
-                if (accountant >= 4){
+                if (acumulador >= 4){
                     return true;
                 }else {
-                    accountant=0;
+                    acumulador=0;
                 }
 
             }
@@ -96,7 +96,7 @@ public class ClasificadorAdn {
         int alto = adn.length;
         int anchoAux = ancho;
 
-        int accountant = 0;
+        int acumulador = 0;
         char[] adnMuestra = "GCTA".toCharArray();
 
         char[][] nuevaMatriz = transformador.modelarAdnEnMatriz(adn);
@@ -108,24 +108,24 @@ public class ClasificadorAdn {
                      vertical < alto && horizontal < ancho && vertical >= 0;
                      vertical -= 1, horizontal += 1) {
 
-                    System.out.println(nuevaMatriz[vertical][horizontal]);
+                    //System.out.println(nuevaMatriz[vertical][horizontal]);
 
                     if (adnMuestra[i] == nuevaMatriz[vertical][horizontal]){
-                        accountant++;
-                    }else if(accountant >= 4)
+                        acumulador++;
+                    }else if(acumulador >= 4)
                     {
                         return true;
                     }else{
-                        accountant=0;
+                        acumulador=0;
                     }
                 }
 
-                System.out.println("\r");
+                //System.out.println("\r");
 
-                if (accountant >= 4){
+                if (acumulador >= 4){
                     return true;
                 }else {
-                    accountant=0;
+                    acumulador=0;
                 }
 
                 if (diagonal == 0) {

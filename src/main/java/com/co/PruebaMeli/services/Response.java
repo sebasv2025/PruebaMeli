@@ -6,15 +6,24 @@ public class Response {
 
     private Humano humano;
 
+    public Response() {
+    }
+
     public Response(Humano humano){
         this.humano = humano;
     }
+
+
 
     public Humano getHumano() {
         return humano;
     }
 
+    public void setHumano(Humano humano) {
+        this.humano = humano;
+    }
+
     public boolean esMutante(){
-        return humano.esMutante();
+        return getHumano().esMutante();
     }
 }

@@ -10,21 +10,18 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class ControladorPrincipal {
 
-    private IHumanoRepositorio repo;
     private IServicioClasificador clasificador;
 
     @Autowired
-    public ControladorPrincipal(IHumanoRepositorio humanoRepositorio, IServicioClasificador clasificador){
-        this.repo = humanoRepositorio;
+    public ControladorPrincipal(IServicioClasificador clasificador){
         this.clasificador = clasificador;
     }
 
-    @RequestMapping(value = "/mutant", method = RequestMethod.POST, consumes="application/json", headers="Accept=application/json")
-    public boolean postMutantes(@RequestBody String[] adn){
+    @RequestMapping(value = "/mutant", method = RequestMethod.POST, consumes = "application/json", headers = "Accept=application/json")
+    public boolean postMutantes(@RequestBody String[] adn) {
 
         Response response = clasificador.procesarAdn(adn);
         return response.esMutante();
     }
-
 
 }

@@ -20,4 +20,5 @@ public class Humano {
     public boolean esMutante() {
         return esMutante;
     }
+
 }
