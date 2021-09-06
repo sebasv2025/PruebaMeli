@@ -5,8 +5,8 @@ import com.co.PruebaMeli.modelo.Humano;
 import com.co.PruebaMeli.repositorio.IHumanoRepositorio;
 import com.co.PruebaMeli.modelo.ClasificadorAdn;
 import com.co.PruebaMeli.modelo.ITransformador;
-import com.co.PruebaMeli.services.excepcion.ExcepcionMutante;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -27,14 +27,23 @@ public class ServicioClasificador implements IServicioClasificador{
     public Response procesarAdn(String[] adn){
 
 
-        if(humanoRepositorio.existsById(transformador.unificarCadenaAdn(adn))){
-            throw new ExcepcionMutante("El adn ya existe.");
+        if((humanoRepositorio.existsById(transformador.unificarCadenaAdn(adn))) && (clasificadorAdn.esMutante(adn))){
+            return new Response(HttpStatus.OK);
+        }
+        if((humanoRepositorio.existsById(transformador.unificarCadenaAdn(adn))) && !(clasificadorAdn.esMutante(adn))){
+            return new Response(HttpStatus.FORBIDDEN);
         }
 
         EntidadHumano entidadHumano = new EntidadHumano(transformador.unificarCadenaAdn(adn), clasificadorAdn.esMutante(adn));
         humanoRepositorio.save(entidadHumano);
 
-        return new Response(new Humano(transformador.unificarCadenaAdn(adn), clasificadorAdn.esMutante(adn)));
+        Humano humano = new Humano(transformador.unificarCadenaAdn(adn), clasificadorAdn.esMutante(adn));
+        if (humano.esMutante()){
+            return new Response(humano, HttpStatus.OK);
+
+        }else {
+            return new Response(humano, HttpStatus.FORBIDDEN);
+        }
     }
 
 }

@@ -1,24 +1,13 @@
 package com.co.PruebaMeli.services;
 
-import com.co.PruebaMeli.entidades.EntidadHumano;
 import com.co.PruebaMeli.modelo.ClasificadorAdn;
-import com.co.PruebaMeli.modelo.Humano;
-import com.co.PruebaMeli.modelo.ITransformador;
 import com.co.PruebaMeli.modelo.Transformador;
 import com.co.PruebaMeli.repositorio.IHumanoRepositorio;
-import com.co.PruebaMeli.services.excepcion.ExcepcionMutante;
-import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import javax.xml.transform.sax.SAXSource;
-
-import java.util.List;
-
-import static com.fasterxml.jackson.databind.cfg.CoercionAction.Fail;
+import org.springframework.http.HttpStatus;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -52,7 +41,7 @@ class ServicioClasificadorTest {
         servicioClasificador = new ServicioClasificador(clasificadorAdn, humanoRepositorio, transformador);
         response = servicioClasificador.procesarAdn(adnMutante);
 
-        assertEquals(true, response.esMutante());
+        assertEquals(HttpStatus.OK, response.obtenerEstado());
 
     }
 
@@ -61,13 +50,12 @@ class ServicioClasificadorTest {
 
         when(humanoRepositorio.existsById(transformador.unificarCadenaAdn(adnMutante))).thenReturn(true);
 
-        try{
-            servicioClasificador = new ServicioClasificador(clasificadorAdn, humanoRepositorio, transformador);
-            response = servicioClasificador.procesarAdn(adnMutante);
-        }catch(ExcepcionMutante excepcionMutante) {
-            assertEquals("El adn ya existe.", excepcionMutante.getMensajeError());
-        }
+        servicioClasificador = new ServicioClasificador(clasificadorAdn, humanoRepositorio, transformador);
+        response = servicioClasificador.procesarAdn(adnMutante);
+
+        assertEquals(HttpStatus.OK, response.obtenerEstado());
     }
+
 
     @Test
     void noEsMutanteSinRegistroEnBaseDeDatos() {
@@ -77,8 +65,18 @@ class ServicioClasificadorTest {
         servicioClasificador = new ServicioClasificador(clasificadorAdn, humanoRepositorio, transformador);
         response = servicioClasificador.procesarAdn(adnNoMutante);
 
-        assertEquals(false, response.esMutante());
+        assertEquals(HttpStatus.FORBIDDEN, response.obtenerEstado());
     }
 
+    @Test
+    void noEsMutanteConRegistroEnBaseDeDatos() {
+
+        when(humanoRepositorio.existsById(transformador.unificarCadenaAdn(adnNoMutante))).thenReturn(true);
+
+        servicioClasificador = new ServicioClasificador(clasificadorAdn, humanoRepositorio, transformador);
+        response = servicioClasificador.procesarAdn(adnNoMutante);
+
+        assertEquals(HttpStatus.FORBIDDEN, response.obtenerEstado());
+    }
 
 }
