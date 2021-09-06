@@ -14,7 +14,7 @@ Repositorio de la aplicacion en GitHub: https://github.com/sebasv2025/PruebaMeli
 
 Instrucciones de uso aplicacion: pruebaMeli
 
-1. En necesario realizar un fork del reporsitorio.
+1. En necesario realizar un fork del reporsitorio. El codigo se encuentra en el branch "Dev"
 2. Debe crearse una base de datos Postgres donde se almacenarán los datos de los mutantes.
 3. Puerto definido para 5432
 4. La base de datos deberá llamarse "datos" 
