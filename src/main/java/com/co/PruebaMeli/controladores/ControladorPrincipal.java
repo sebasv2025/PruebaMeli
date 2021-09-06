@@ -17,7 +17,7 @@ public class ControladorPrincipal {
         this.clasificador = clasificador;
     }
 
-    @RequestMapping(value = "/mutant", method = RequestMethod.POST, consumes = "application/json", headers = "Accept=application/json")
+    @RequestMapping(value = "/mutante", method = RequestMethod.POST, consumes = "application/json", headers = "Accept=application/json")
     public boolean postMutantes(@RequestBody String[] adn) {
 
         Response response = clasificador.procesarAdn(adn);
